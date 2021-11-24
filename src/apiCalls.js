@@ -170,6 +170,89 @@ function postRoutine(token, name, goal, isPublic)
     .catch(console.error);
 }
 
+function deleteRoutine(token, routineId)
+{
+    fetch(BaseUrl + 'api/routines/' + routineId, {
+    method: "DELETE",
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    },
+    }).then(response => response.json())
+    .then(result => {
+        console.log(result);
+        return result;
+    })
+    .catch(console.error);
+}
+
+function attachActivity(routineId, activityId, count, duration)
+{
+    fetch(BaseUrl + 'api/routines/'+ routineId + '/activities', {
+    method: "POST",
+    body: JSON.stringify({
+        activityId,
+        count, 
+        duration
+    })
+    }).then(response => response.json())
+    .then(result => {
+        console.log(result);
+        return result;
+    })
+    .catch(console.error);
+}
+
+function editRoutineActivity(token, routineActivityId, count, duration)
+{
+    fetch(BaseUrl + 'api/routine_activities/' + routineActivityId, {
+    method: "PATCH",
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    },
+    body: JSON.stringify({
+        count,
+        duration
+    })
+    }).then(response => response.json())
+    .then(result => {
+        console.log(result);
+        return result;
+    })
+    .catch(console.error);
+}
+
+function deleteRoutineActivity(token, routineActivityId)
+{
+    fetch(BaseUrl + 'routine_activities/'+ routineActivityId, {
+    method: "DELETE",
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    }
+    }).then(response => response.json())
+    .then(result => {
+        console.log(result);
+        return result;
+    })
+    .catch(console.error);
+}
+
+export {Register,
+        Login, 
+        getUser, 
+        getRoutinesByUser, 
+        getActivities, 
+        postActivity, 
+        editActivity, 
+        getRoutinesByActivity, 
+        getRoutines, 
+        postRoutine, 
+        deleteRoutine, 
+        attachActivity,
+        editRoutineActivity, 
+        deleteRoutineActivity};
 
 
 

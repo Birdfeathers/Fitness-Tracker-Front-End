@@ -13,7 +13,11 @@
   "dependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+<<<<<<< HEAD
     "react-router-dom": "^5.3.0",
+=======
+    "react-router-dom": "^6.0.2",
+>>>>>>> 42a6b318232897c4c2794897563680f0a0d0a6b8
     "react-scripts": "^4.0.3"
   },
   "browserslist": {
