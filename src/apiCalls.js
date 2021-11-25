@@ -72,18 +72,20 @@ function getRoutinesByUser(user, token)
     .catch(console.error);
 }
 
-function getActivities()
+async function getActivities()
 {
-    fetch(BaseUrl + 'api/activities', {
+    try {
+    const response = await fetch(BaseUrl + 'api/activities', {
     headers: {
         'Content-Type': 'application/json',
     },
-    }).then(response => response.json())
-    .then(result => {
-        console.log(result);
-        return result;
     })
-    .catch(console.error);
+    const result = await response.json();
+    console.log(result);
+    return result;
+    } catch (error) {
+        throw error;
+    }
 }
 
 function postActivity(token, name, description)
