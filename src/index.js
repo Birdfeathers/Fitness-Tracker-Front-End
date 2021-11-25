@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import {Home, Login, Activities} from './Components'
+import {Home, Login, Activities, SingleActivity} from './Components'
 import { logout } from './helperFunctions';
 
 const App = () => {
@@ -37,7 +37,8 @@ const App = () => {
                     <Route exact path='/' render={(routeProps) => <Home {...routeProps}/>}></Route>
                     <Route path='/login' render={(routeProps) => <Login {...routeProps} setToken={setToken}/>}></Route>
                     <Route path='/register' render={(routeProps) => <Login {...routeProps} setToken={setToken}/>}></Route>
-                    <Route path='/activities' render={(routeProps) => <Activities {...routeProps} token={token}/>}></Route>
+                    <Route exact path='/activities' render={(routeProps) => <Activities {...routeProps} token={token}/>}></Route>
+                    <Route path='/activities/:activityId' render={(routeProps) => <SingleActivity {...routeProps}/>}></Route>
 
                 </div>
             </div>
