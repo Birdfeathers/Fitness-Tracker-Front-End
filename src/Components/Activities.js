@@ -11,6 +11,13 @@ const Activities = ({token}) => {
 
     return (
         <>
+            {token?
+                <form>
+                    <input placeholder='test'></input>
+                </form>
+                :
+                null
+            }
             <h1>Activities</h1>
             {activities?
                 activities.map((activity) => {

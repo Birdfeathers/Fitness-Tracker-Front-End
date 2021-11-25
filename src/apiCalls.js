@@ -84,13 +84,14 @@ async function getActivities()
     console.log(result);
     return result;
     } catch (error) {
-        throw error;
+        console.error(error);
     }
 }
 
-function postActivity(token, name, description)
+async function postActivity(token, name, description)
 {
-    fetch(BaseUrl + 'api/activities', {
+    try {
+    const response = await fetch(BaseUrl + 'api/activities', {
     method: "POST",
     headers: {
         'Content-Type': 'application/json',
@@ -100,17 +101,19 @@ function postActivity(token, name, description)
         name,
         description
     })
-    }).then(response => response.json())
-    .then(result => {
-        console.log(result);
-        return result;
     })
-    .catch(console.error);
+    const result = await response.json();
+    console.log(result)
+    return result;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
-function editActivity(token, activityId, name, description)
+async function editActivity(token, activityId, name, description)
 {
-    fetch(BaseUrl + 'api/activities/' + activityId, {
+    try {
+    const response = await fetch(BaseUrl + 'api/activities/' + activityId, {
     method: "PATCH",
     headers: {
         'Content-Type': 'application/json',
@@ -120,25 +123,27 @@ function editActivity(token, activityId, name, description)
         name,
         description
     })
-    }).then(response => response.json())
-    .then(result => {
-        console.log(result);
     })
-    .catch(console.error);
+    const result = await response.json();
+    return result;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
-function getRoutinesByActivity(activityId)
+async function getRoutinesByActivity(activityId)
 {
-    fetch(BaseUrl + 'api/activities/'+ activityId + '/routines', {
+    try {
+    const response = await fetch(BaseUrl + 'api/activities/'+ activityId + '/routines', {
     headers: {
         'Content-Type': 'application/json',
     },
-    }).then(response => response.json())
-    .then(result => {
-        console.log(result);
-        return result;
     })
-    .catch(console.error);
+    const result = await response.json();
+    return result;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 function getRoutines()
