@@ -1,6 +1,6 @@
-const BaseUrl = "https://sleepy-thicket-94945.herokuapp.com/";
+const BaseUrl = "http://fitnesstrac-kr.herokuapp.com/";
 
-function Register(username, password)
+async function register(username, password, setToken)
 {
     fetch(BaseUrl + 'api/users/register', {
     method: "POST",
@@ -14,12 +14,14 @@ function Register(username, password)
     }).then(response => response.json())
     .then(result => {
         console.log(result);
-        return result.token;
+        setToken(result.token);
+        localStorage.setItem('token', result.token)
+        return result;
     })
     .catch(console.error);
 }
 
-function Login(username, password)
+async function login(username, password, setToken)
 {
     fetch(BaseUrl + 'api/users/login', {
     method: "POST",
@@ -33,6 +35,8 @@ function Login(username, password)
     }).then(response => response.json())
     .then(result => {
         console.log(result);
+        setToken(result.token);
+        localStorage.setItem('token', result.token);
         return result.token;
     })
     .catch(console.error);
@@ -239,8 +243,8 @@ function deleteRoutineActivity(token, routineActivityId)
     .catch(console.error);
 }
 
-export {Register,
-        Login, 
+export {register,
+        login, 
         getUser, 
         getRoutinesByUser, 
         getActivities, 
