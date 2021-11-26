@@ -6,7 +6,8 @@ import { getRoutines,
         editRoutine,
         getActivities,
         attachActivity,
-        deleteRoutineActivity } from "../apiCalls";
+        deleteRoutineActivity,
+        editRoutineActivity } from "../apiCalls";
 
 const Routines = ({token}) => {
     const [routines, setRoutines] = useState([]);
@@ -102,6 +103,21 @@ const Routines = ({token}) => {
                             console.log(activity.routineActivityId);
                             deleteRoutineActivity(token, activity.routineActivityId);
                         }}>Remove Activity</button>
+                        <h3>Edit Routine Activity</h3>
+                        <form onSubmit = {(event) => {
+                            event.preventDefault();
+                            editRoutineActivity(token, activity.routineActivityId, count, duration);
+                        }}>
+                        <input 
+                            placeholder='Count*'
+                            value={count}
+                            onChange={(event) => setCount(event.target.value)} />
+                        <input 
+                            placeholder= 'Duration*'
+                            value={duration}
+                            onChange={(event) => setDuration(event.target.value)} />
+                        <input type = 'submit' />
+                        </form>
                     </>: null}
                     <p><b>Description: </b>{activity.description}</p>
                     <p><b>Duration: </b>{activity.duration}</p>
