@@ -73,7 +73,7 @@ function getRoutinesByUser(user, token)
     .catch(console.error);
 }
 
-async function getActivities()
+async function getActivities(setActivities)
 {
     try {
     const response = await fetch(BaseUrl + 'api/activities', {
@@ -82,6 +82,7 @@ async function getActivities()
     },
     })
     const result = await response.json();
+    setActivities(result);
     console.log(result);
     return result;
     } catch (error) {
