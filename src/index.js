@@ -39,7 +39,7 @@ const App = () => {
                     <Route path='/register' render={(routeProps) => <Login {...routeProps} setToken={setToken}/>}></Route>
                     <Route exact path='/activities' render={(routeProps) => <Activities {...routeProps} token={token}/>}></Route>
                     <Route path='/activities/:activityId' render={(routeProps) => <SingleActivity {...routeProps}/>}></Route>
-                    <Route path='/routines' render={(routeProps) => <Routines {...routeProps}/>}></Route>
+                    <Route path='/routines' render={(routeProps) => <Routines {...routeProps} token = {token}/>}></Route>
 
                 </div>
             </div>

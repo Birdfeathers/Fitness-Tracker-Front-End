@@ -42,7 +42,7 @@ async function login(username, password, setToken)
     .catch(console.error);
 }
 
-function getUser(token)
+function getUser(token, setUser)
 {
     fetch(BaseUrl + 'api/users/me', {
     headers: {
@@ -52,6 +52,7 @@ function getUser(token)
     }).then(response => response.json())
     .then(result => {
         console.log(result);
+        setUser(result);
         return result;
     })
     .catch(console.error);
@@ -162,7 +163,7 @@ function getRoutines(setRoutines)
     .catch(console.error);
 }
 
-function postRoutine(token, name, goal, isPublic)
+async function postRoutine(token, name, goal, isPublic)
 {
     fetch(BaseUrl+ 'api/routines', {
     method: "POST",
@@ -178,6 +179,7 @@ function postRoutine(token, name, goal, isPublic)
     }).then(response => response.json())
     .then(result => {
         console.log(result);
+        set
         return result;
     })
     .catch(console.error);
