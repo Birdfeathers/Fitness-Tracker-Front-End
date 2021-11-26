@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { getActivities, postActivity } from "../apiCalls";
 
-const Activities = ({token}) => {
+const Activities = ({history, token}) => {
     const [activities, setActivities] = useState([]);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -44,9 +44,10 @@ const Activities = ({token}) => {
             {activities?
                 activities.map((activity, idx) => {
                     return (<a 
+                    href=""
                     key={idx}
                     onClick={() => {
-
+                        history.push(`/activities/${activity.id}`);
                     }}>
                     <h3>{activity.name}</h3>
                     <p>Description: {activity.description}</p>
