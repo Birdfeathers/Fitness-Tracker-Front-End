@@ -185,6 +185,26 @@ async function postRoutine(token, name, goal, isPublic)
     .catch(console.error);
 }
 
+function editRoutine(token, routineId, name, goal)
+{
+    fetch(BaseUrl + 'api/routines/' + routineId, {
+    method: "PATCH",
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+    },
+    body: JSON.stringify({
+        name,
+        goal
+    })
+    }).then(response => response.json())
+    .then(result => {
+        console.log(result);
+        return result;
+    })
+    .catch(console.error);
+}
+
 function deleteRoutine(token, routineId)
 {
     fetch(BaseUrl + 'api/routines/' + routineId, {
@@ -264,6 +284,7 @@ export {register,
         getRoutinesByActivity, 
         getRoutines, 
         postRoutine, 
+        editRoutine,
         deleteRoutine, 
         attachActivity,
         editRoutineActivity, 
