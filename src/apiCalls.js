@@ -226,6 +226,9 @@ function attachActivity(routineId, activityId, count, duration)
 {
     fetch(BaseUrl + 'api/routines/'+ routineId + '/activities', {
     method: "POST",
+    headers: {
+        'Content-Type': 'application/json'
+      },
     body: JSON.stringify({
         activityId,
         count, 

@@ -1,16 +1,27 @@
 import React, {useState, useEffect} from "react";
-import { getRoutines, postRoutine, getUser, deleteRoutine, editRoutine } from "../apiCalls";
+import { getRoutines, 
+        postRoutine, 
+        getUser, 
+        deleteRoutine, 
+        editRoutine,
+        getActivities,
+        attachActivity } from "../apiCalls";
 
 const Routines = ({token}) => {
     const [routines, setRoutines] = useState([]);
     const [name, setName] = useState("");
     const [goal, setGoal] = useState("");
     const [user, setUser] = useState({});
+    const [activities, setActivities] = useState([]);
+    const [activityId, setActivityId] = useState();
+    const [count, setCount] = useState("");
+    const [duration, setDuration] = useState("");
     
 
     useEffect(async () => {
         getRoutines(setRoutines);
         getUser(token, setUser);
+        getActivities(setActivities);
 
     }, [])
     
@@ -56,6 +67,27 @@ const Routines = ({token}) => {
                     value={goal}
                     onChange={(event) => setGoal(event.target.value)} />
                     <input type='submit' />
+                </form>
+                <h3>Add Activity to Routine</h3>
+                <form onSubmit = {(event) => {
+                    event.preventDefault();
+                    console.log(routine.id, activityId, count, duration);
+                    attachActivity(routine.id, activityId, count, duration);
+                }}>
+                    <select onChange = {(event) => {setActivityId(event.target.value)}}>
+                        {activities.map((activity, key) => {
+                            return <option key = {key} value = {activity.id} >{activity.name}</option>
+                        })}
+                    </select>
+                    <input 
+                        placeholder='Count*'
+                        value={count}
+                        onChange={(event) => setCount(event.target.value)} />
+                     <input 
+                        placeholder= 'Duration*'
+                        value={duration}
+                        onChange={(event) => setDuration(event.target.value)} />
+                    <input type = 'submit' />
                 </form>
 
             </>: null}
