@@ -147,7 +147,7 @@ async function getRoutinesByActivity(activityId)
     }
 }
 
-function getRoutines()
+function getRoutines(setRoutines)
 {
     fetch(BaseUrl + 'api/routines', {
     headers: {
@@ -156,6 +156,7 @@ function getRoutines()
     }).then(response => response.json())
     .then(result => {
         console.log(result);
+        setRoutines(result);
         return result;
     })
     .catch(console.error);
