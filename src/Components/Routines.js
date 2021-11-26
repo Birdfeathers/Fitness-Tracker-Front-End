@@ -5,7 +5,8 @@ import { getRoutines,
         deleteRoutine, 
         editRoutine,
         getActivities,
-        attachActivity } from "../apiCalls";
+        attachActivity,
+        deleteRoutineActivity } from "../apiCalls";
 
 const Routines = ({token}) => {
     const [routines, setRoutines] = useState([]);
@@ -98,7 +99,8 @@ const Routines = ({token}) => {
                     <p><b>{activity.name}</b></p>
                     {user.id === routine.creatorId? <>
                         <button onClick = { () => {
-
+                            console.log(activity.routineActivityId);
+                            deleteRoutineActivity(token, activity.routineActivityId);
                         }}>Remove Activity</button>
                     </>: null}
                     <p><b>Description: </b>{activity.description}</p>

@@ -264,7 +264,7 @@ function editRoutineActivity(token, routineActivityId, count, duration)
 
 function deleteRoutineActivity(token, routineActivityId)
 {
-    fetch(BaseUrl + 'routine_activities/'+ routineActivityId, {
+    fetch(BaseUrl + 'api/routine_activities/'+ routineActivityId, {
     method: "DELETE",
     headers: {
         'Content-Type': 'application/json',
