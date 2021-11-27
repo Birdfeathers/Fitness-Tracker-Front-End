@@ -20,18 +20,21 @@ const App = () => {
                     <Link to='/'>Home</Link>
                     <Link to='/routines'>Routines</Link>
                     <Link to='/activities'>Activities</Link>
-                    <Link to='/my-routines'>MyRoutines</Link>
+                    
                     {!token?
                         <>
                         <Link to='/login'>Login</Link>
                         <Link to='/register'>Register</Link>
                         </>
                         :
+                        <>
+                        <Link to='/my-routines'>MyRoutines</Link>
                         <Link 
                         to='/login'
                         onClick={() => {
                             logout(setToken);
                         }}>Logout</Link>
+                        </>
                     }
                 </div>
                 <div id='mainsection'>
