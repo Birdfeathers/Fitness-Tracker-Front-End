@@ -1,16 +1,49 @@
 import React, {useState, useEffect} from "react";
-import { editActivity, getRoutinesByActivity } from "../apiCalls";
+import { editActivity, getRoutinesByActivity, getActivities } from "../apiCalls";
 
 const SingleActivity = ({match}) => {
     const [routines, setRoutines] = useState('');
+    const [activity, setActivity] = useState('');
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
 
     useEffect(async () => {
+        const activities = await getActivities();
+        const filteredActivity = activities.filter((activity) => parseInt(match.params.activityId) === activity.id);
+        setActivity(filteredActivity[0]);
+
+        setName(filteredActivity[0].name);
+        setDescription(filteredActivity[0].description);
+
         const result = await getRoutinesByActivity(match.params.activityId);
         setRoutines(result);
     }, [])
     return (
         <>
-        <h1>Related Routines</h1>
+        <div>
+            <h1>{activity.name}</h1>
+            <p><b>Name: </b>{activity.name}</p>
+            <p><b>Description: </b>{activity.description}</p>
+        </div>
+        <div>
+            <h3>Edit Activity</h3>
+            <form>
+                <input
+                placeholder='name'
+                value={name}
+                onChange={(event) => {
+                    setName(event.target.value);
+                }} />
+                <input
+                placeholder='description'
+                value={description}
+                onChange={(event) => {
+                    setDescription(event.target.value);
+                }} />
+                <input type='submit' />
+            </form>
+        </div>
+        <h2>Related Routines</h2>
         {routines.length?
             routines.map((routine, idx) => {
                 return (
@@ -23,7 +56,7 @@ const SingleActivity = ({match}) => {
                         {routine.activities.map((activity, idx) => {
                             return (
                                 <div key={idx}>
-                                    <h4>{activity.name}</h4>
+                                    <h5>{activity.name}</h5>
                                     <p><b>Description: </b>{activity.description}</p>
                                     <p><b>Duration: </b>{activity.duration}</p>
                                     <p><b>Count: </b>{activity.count}</p>
