@@ -7,6 +7,7 @@ import { logout } from './helperFunctions';
 const App = () => {
 
     const [token, setToken] = useState(localStorage.getItem('token'));
+    const [selectedActivity, setSelectedActivity] = useState('');
 
     useEffect(() => {
 
@@ -37,8 +38,8 @@ const App = () => {
                     <Route exact path='/' render={(routeProps) => <Home {...routeProps}/>}></Route>
                     <Route path='/login' render={(routeProps) => <Login {...routeProps} setToken={setToken}/>}></Route>
                     <Route path='/register' render={(routeProps) => <Login {...routeProps} setToken={setToken}/>}></Route>
-                    <Route exact path='/activities' render={(routeProps) => <Activities {...routeProps} token={token}/>}></Route>
-                    <Route path='/activities/:activityId' render={(routeProps) => <SingleActivity {...routeProps}/>}></Route>
+                    <Route exact path='/activities' render={(routeProps) => <Activities {...routeProps} token={token} setSelectedActivity={setSelectedActivity}/>}></Route>
+                    <Route path='/activities/:activityId' render={(routeProps) => <SingleActivity {...routeProps} selectedActivity={selectedActivity}/>}></Route>
                     <Route path='/routines' render={(routeProps) => <Routines {...routeProps} token = {token}/>}></Route>
 
                 </div>
