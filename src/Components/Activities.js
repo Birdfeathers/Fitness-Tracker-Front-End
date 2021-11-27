@@ -21,10 +21,17 @@ const Activities = ({history, token, setSelectedActivity}) => {
                 <form
                 onSubmit={async (event) => {
                     event.preventDefault();
-
+                    if (!name || !description) {
+                        alert('Please fill out all required fields');
+                        return;
+                    }
                     const newlyCreatedActivity = await postActivity(token, name, description);
                     if (newlyCreatedActivity.error) alert(newlyCreatedActivity.message);
-                    else setNewActivity(newlyCreatedActivity);
+                    else {
+                        setNewActivity(newlyCreatedActivity);
+                        setName('');
+                        setDescription('');
+                    }
 
                 }}>
                     <input 
