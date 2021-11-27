@@ -4,5 +4,6 @@ import Activities from './Activities';
 import SingleActivity from './SingleActivity';
 import Routines from './Routines';
 import MyRoutines from './MyRoutines'
+import CreatorPublicRoutines from './CreatorPublicRoutines';
 
-export {Home, Login, Activities, SingleActivity, Routines, MyRoutines};
+export {Home, Login, Activities, SingleActivity, Routines, MyRoutines, CreatorPublicRoutines};
