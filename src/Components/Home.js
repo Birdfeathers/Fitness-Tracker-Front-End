@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 
-const Home = () => {
+const Home = ({token}) => {
     return (
         <h1>HOME</h1>
     )

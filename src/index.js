@@ -35,7 +35,7 @@ const App = () => {
                     }
                 </div>
                 <div id='mainsection'>
-                    <Route exact path='/' render={(routeProps) => <Home {...routeProps}/>}></Route>
+                    <Route exact path='/' render={(routeProps) => <Home {...routeProps} token={token}/>}></Route>
                     <Route path='/login' render={(routeProps) => <Login {...routeProps} setToken={setToken}/>}></Route>
                     <Route path='/register' render={(routeProps) => <Login {...routeProps} setToken={setToken}/>}></Route>
                     <Route exact path='/activities' render={(routeProps) => <Activities {...routeProps} token={token} setSelectedActivity={setSelectedActivity}/>}></Route>
