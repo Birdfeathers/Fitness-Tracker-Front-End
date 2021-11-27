@@ -73,7 +73,7 @@ function getRoutinesByUser(user, token)
     .catch(console.error);
 }
 
-async function getActivities(setActivities)
+async function getActivities()
 {
     try {
     const response = await fetch(BaseUrl + 'api/activities', {
@@ -82,7 +82,6 @@ async function getActivities(setActivities)
     },
     })
     const result = await response.json();
-    setActivities(result);
     console.log(result);
     return result;
     } catch (error) {
@@ -166,7 +165,7 @@ function getRoutines(setRoutines)
 
 async function postRoutine(token, name, goal, isPublic, setRoutines)
 {
-    fetch(BaseUrl+ 'api/routines', {
+    await fetch(BaseUrl+ 'api/routines', {
     method: "POST",
     headers: {
         'Content-Type': 'application/json',

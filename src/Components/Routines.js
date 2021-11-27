@@ -23,7 +23,7 @@ const Routines = ({token}) => {
     useEffect(async () => {
         getRoutines(setRoutines);
         getUser(token, setUser);
-        getActivities(setActivities);
+        setActivities(await getActivities());
 
     }, [])
     
@@ -34,10 +34,17 @@ const Routines = ({token}) => {
             <h2>Add New Routine </h2>
             <form onSubmit = {async (event) => {
                 event.preventDefault();
-                const newRoutine = await postRoutine(token, name, goal, true, setRoutines);
-                
-                // if (newRoutine.error) alert(newRoutine.message);
-                // else{getRoutines(setRoutines);}
+                try{
+                    const newRoutine = await postRoutine(token, name, goal, true, setRoutines);
+                    console.log("new Routine", newRoutine);
+                    
+                    // if (newRoutine.error) alert(newRoutine.message);
+                    // else{getRoutines(setRoutines);}
+                }
+                catch(error)
+                {
+                    console.log(error);
+                }
                 
             }}>
             <input 
