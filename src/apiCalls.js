@@ -58,19 +58,23 @@ function getUser(token, setUser)
     .catch(console.error);
 }
 
-function getRoutinesByUser(userId, token)
+async function getRoutinesByUser(userId, token)
 {
-    fetch(BaseUrl + 'api/users/'+ userId + '/routines', {
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-    },
-    }).then(response => response.json())
-    .then(result => {
+    try{
+        const response = await fetch(BaseUrl + 'api/users/'+ userId + '/routines', {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        })
+        const result = await response.json;
         console.log(result);
         return result;
-    })
-    .catch(console.error);
+    } catch(error) {
+        console.error(error);
+    }
+   
+   
 }
 
 async function getActivities()

@@ -30,33 +30,6 @@ const Routines = ({token}) => {
     return (
     <>
         <h1>Routines</h1>
-        {token? <>
-            <h2>Add New Routine </h2>
-            <form onSubmit = {async (event) => {
-                event.preventDefault();
-                try{
-                    const newRoutine = await postRoutine(token, name, goal, true, setRoutines);
-                    console.log("new Routine", newRoutine);
-                    
-                    // if (newRoutine.error) alert(newRoutine.message);
-                    // else{getRoutines(setRoutines);}
-                }
-                catch(error)
-                {
-                    console.log(error);
-                }
-                
-            }}>
-            <input 
-                    placeholder='Name*'
-                    // value={name}
-                    onChange={(event) => setName(event.target.value)} />
-            <input 
-                    placeholder='Goal*'
-                    // value={goal}
-                    onChange={(event) => setGoal(event.target.value)} />
-                    <input type='submit' />
-        </form></>: null}
         {routines.map((routine, key) => {return(
         <div key = {key}>
             <h4><b>{routine.name}</b></h4>
