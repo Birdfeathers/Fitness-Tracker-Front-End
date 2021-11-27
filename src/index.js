@@ -42,7 +42,7 @@ const App = () => {
                     <Route path='/activities/:activityId' render={(routeProps) => <SingleActivity {...routeProps} token={token}/>}></Route>
                     <Route exact path='/routines' render={(routeProps) => <Routines {...routeProps} token = {token}/>}></Route>
                     <Route path='/my-routines' render={(routeProps) => <MyRoutines {...routeProps} token = {token}/>}></Route>
-                    <Route path='/routines/:username' render={(routeProps) => <CreatorPublicRoutines {...routeProps} />}></Route>
+                    <Route path='/routines/:username' render={(routeProps) => <CreatorPublicRoutines {...routeProps} token={token}/>}></Route>
 
                 </div>
             </div>
