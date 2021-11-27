@@ -72,7 +72,7 @@ async function getRoutinesByUser(username, token)
             'Authorization': 'Bearer ' + token
         },
         })
-        const result = await response.json;
+        const result = await response.json();
         console.log(result);
         return result;
     } catch(error) {
@@ -123,19 +123,19 @@ async function postActivity(token, name, description)
 async function editActivity(token, activityId, name, description)
 {
     try {
-    const response = await fetch(BaseUrl + 'api/activities/' + activityId, {
-    method: "PATCH",
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-    },
-    body: JSON.stringify({
-        name,
-        description
-    })
-    })
-    const result = await response.json();
-    return result;
+        const response = await fetch(BaseUrl + 'api/activities/' + activityId, {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            name,
+            description
+        })
+        })
+        const result = await response.json();
+        return result;
     } catch (error) {
         console.error(error);
     }
@@ -144,37 +144,38 @@ async function editActivity(token, activityId, name, description)
 async function getRoutinesByActivity(activityId)
 {
     try {
-    const response = await fetch(BaseUrl + 'api/activities/'+ activityId + '/routines', {
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    })
-    const result = await response.json();
-    console.log(result);
-    return result;
+        const response = await fetch(BaseUrl + 'api/activities/'+ activityId + '/routines', {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        })
+        const result = await response.json();
+        console.log(result);
+        return result;
     } catch (error) {
         console.error(error);
     }
 }
 
-function getRoutines(setRoutines)
-{
-    fetch(BaseUrl + 'api/routines', {
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    }).then(response => response.json())
-    .then(result => {
-        console.log(result);
-        setRoutines(result);
-        return result;
-    })
-    .catch(console.error);
+async function getRoutines()
+{   try {
+        const response = await fetch(BaseUrl + 'api/routines', {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        })
+            const result = await response.json();
+            console.log(result);
+            return result;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
-async function postRoutine(token, name, goal, isPublic, setRoutines)
-{
-    await fetch(BaseUrl+ 'api/routines', {
+async function postRoutine(token, name, goal, isPublic)
+{   
+    try {
+    const response = await fetch(BaseUrl+ 'api/routines', {
     method: "POST",
     headers: {
         'Content-Type': 'application/json',
@@ -185,13 +186,13 @@ async function postRoutine(token, name, goal, isPublic, setRoutines)
         goal,
         isPublic
     })
-    }).then(response => response.json())
-    .then(result => {
-        console.log(result);
-        getRoutines(setRoutines);
-        return result;
     })
-    .catch(console.error);
+        const result = await response.json();
+        console.log(result);
+        return result;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 function editRoutine(token, routineId, name, goal, setRoutines)
