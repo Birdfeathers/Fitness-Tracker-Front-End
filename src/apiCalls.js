@@ -58,9 +58,9 @@ function getUser(token, setUser)
     .catch(console.error);
 }
 
-function getRoutinesByUser(user, token)
+function getRoutinesByUser(userId, token)
 {
-    fetch(BaseUrl + 'api/users/'+ user + '/routines', {
+    fetch(BaseUrl + 'api/users/'+ userId + '/routines', {
     headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
