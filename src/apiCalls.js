@@ -2,66 +2,71 @@ const BaseUrl = "http://fitnesstrac-kr.herokuapp.com/";
 
 async function register(username, password, setToken)
 {
-    fetch(BaseUrl + 'api/users/register', {
-    method: "POST",
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-        username,
-        password
-    })
-    }).then(response => response.json())
-    .then(result => {
+    try {
+        const response = await fetch(BaseUrl + 'api/users/register', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username,
+            password
+        })
+        })
+        const result = await response.json();
         console.log(result);
         setToken(result.token);
         localStorage.setItem('token', result.token)
         return result;
-    })
-    .catch(console.error);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 async function login(username, password, setToken)
 {
-    fetch(BaseUrl + 'api/users/login', {
-    method: "POST",
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-        username,
-        password
-    })
-    }).then(response => response.json())
-    .then(result => {
+    try {
+        const response = await fetch(BaseUrl + 'api/users/login', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username,
+            password
+        })
+        })
+        const result = response.json();
         console.log(result);
         setToken(result.token);
         localStorage.setItem('token', result.token);
-        return result.token;
-    })
-    .catch(console.error);
-}
-
-function getUser(token, setUser)
-{
-    fetch(BaseUrl + 'api/users/me', {
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-    },
-    }).then(response => response.json())
-    .then(result => {
-        console.log(result);
-        setUser(result);
         return result;
-    })
-    .catch(console.error);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
-async function getRoutinesByUser(userId, token)
+async function getUser(token, setUser)
+{
+    try {
+        const response = await fetch(BaseUrl + 'api/users/me', {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        })
+        const result = await response.json();
+        console.log(result);
+        return result;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function getRoutinesByUser(username, token)
 {
     try{
-        const response = await fetch(BaseUrl + 'api/users/'+ userId + '/routines', {
+        const response = await fetch(BaseUrl + 'api/users/'+ username + '/routines', {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
