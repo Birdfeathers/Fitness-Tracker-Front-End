@@ -164,7 +164,7 @@ function getRoutines(setRoutines)
     .catch(console.error);
 }
 
-async function postRoutine(token, name, goal, isPublic)
+async function postRoutine(token, name, goal, isPublic, setRoutines)
 {
     fetch(BaseUrl+ 'api/routines', {
     method: "POST",
@@ -180,13 +180,13 @@ async function postRoutine(token, name, goal, isPublic)
     }).then(response => response.json())
     .then(result => {
         console.log(result);
-        set
+        getRoutines(setRoutines);
         return result;
     })
     .catch(console.error);
 }
 
-function editRoutine(token, routineId, name, goal)
+function editRoutine(token, routineId, name, goal, setRoutines)
 {
     fetch(BaseUrl + 'api/routines/' + routineId, {
     method: "PATCH",
@@ -201,12 +201,13 @@ function editRoutine(token, routineId, name, goal)
     }).then(response => response.json())
     .then(result => {
         console.log(result);
+        getRoutines(setRoutines);
         return result;
     })
     .catch(console.error);
 }
 
-function deleteRoutine(token, routineId)
+function deleteRoutine(token, routineId, setRoutines)
 {
     fetch(BaseUrl + 'api/routines/' + routineId, {
     method: "DELETE",
@@ -217,12 +218,13 @@ function deleteRoutine(token, routineId)
     }).then(response => response.json())
     .then(result => {
         console.log(result);
+        getRoutines(setRoutines);
         return result;
     })
     .catch(console.error);
 }
 
-function attachActivity(routineId, activityId, count, duration)
+function attachActivity(routineId, activityId, count, duration, setRoutines)
 {
     fetch(BaseUrl + 'api/routines/'+ routineId + '/activities', {
     method: "POST",
@@ -237,12 +239,13 @@ function attachActivity(routineId, activityId, count, duration)
     }).then(response => response.json())
     .then(result => {
         console.log(result);
+        getRoutines(setRoutines);
         return result;
     })
     .catch(console.error);
 }
 
-function editRoutineActivity(token, routineActivityId, count, duration)
+function editRoutineActivity(token, routineActivityId, count, duration, setRoutines)
 {
     fetch(BaseUrl + 'api/routine_activities/' + routineActivityId, {
     method: "PATCH",
@@ -257,12 +260,13 @@ function editRoutineActivity(token, routineActivityId, count, duration)
     }).then(response => response.json())
     .then(result => {
         console.log(result);
+        getRoutines(setRoutines);
         return result;
     })
     .catch(console.error);
 }
 
-function deleteRoutineActivity(token, routineActivityId)
+function deleteRoutineActivity(token, routineActivityId, setRoutines)
 {
     fetch(BaseUrl + 'api/routine_activities/'+ routineActivityId, {
     method: "DELETE",
@@ -273,6 +277,7 @@ function deleteRoutineActivity(token, routineActivityId)
     }).then(response => response.json())
     .then(result => {
         console.log(result);
+        getRoutines(setRoutines);
         return result;
     })
     .catch(console.error);

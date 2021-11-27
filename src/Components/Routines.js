@@ -34,18 +34,19 @@ const Routines = ({token}) => {
             <h2>Add New Routine </h2>
             <form onSubmit = {async (event) => {
                 event.preventDefault();
-                const newRoutine = await postRoutine(token, name, goal, true);
-                if (newRoutine.error) alert(newRoutine.message);
-                else{getRoutines(setRoutines);}
+                const newRoutine = await postRoutine(token, name, goal, true, setRoutines);
+                
+                // if (newRoutine.error) alert(newRoutine.message);
+                // else{getRoutines(setRoutines);}
                 
             }}>
             <input 
                     placeholder='Name*'
-                    value={name}
+                    // value={name}
                     onChange={(event) => setName(event.target.value)} />
             <input 
                     placeholder='Goal*'
-                    value={goal}
+                    // value={goal}
                     onChange={(event) => setGoal(event.target.value)} />
                     <input type='submit' />
         </form></>: null}
@@ -53,20 +54,20 @@ const Routines = ({token}) => {
         <div key = {key}>
             <h4><b>{routine.name}</b></h4>
             {user.id === routine.creatorId? <> 
-                <button onClick = {(event) => { deleteRoutine(token, routine.id)}}> Delete Routine</button>
+                <button onClick = {(event) => { deleteRoutine(token, routine.id, setRoutines)}}> Delete Routine</button>
                 <h3>Edit Routine</h3>
                 <form onSubmit = {(event) => {
                     event.preventDefault();
-                    editRoutine(token, routine.id, name, goal)
+                    editRoutine(token, routine.id, name, goal, setRoutines);
 
                 }}>
                 <input 
                     placeholder='Name*'
-                    value={name}
+                    // value={name}
                     onChange={(event) => setName(event.target.value)} />
             <input 
                     placeholder='Goal*'
-                    value={goal}
+                    // value={goal}
                     onChange={(event) => setGoal(event.target.value)} />
                     <input type='submit' />
                 </form>
@@ -74,20 +75,21 @@ const Routines = ({token}) => {
                 <form onSubmit = {(event) => {
                     event.preventDefault();
                     console.log(routine.id, activityId, count, duration);
-                    attachActivity(routine.id, activityId, count, duration);
+                    attachActivity(routine.id, activityId, count, duration, setRoutines);
                 }}>
-                    <select onChange = {(event) => {setActivityId(event.target.value)}}>
+                    <select  onChange = {(event) => {setActivityId(event.target.value)}}>
+                        <option value = {"none"}> Select an activity: </option>
                         {activities.map((activity, key) => {
                             return <option key = {key} value = {activity.id} >{activity.name}</option>
                         })}
                     </select>
                     <input 
                         placeholder='Count*'
-                        value={count}
+                        // value={count}
                         onChange={(event) => setCount(event.target.value)} />
                      <input 
                         placeholder= 'Duration*'
-                        value={duration}
+                        // value={duration}
                         onChange={(event) => setDuration(event.target.value)} />
                     <input type = 'submit' />
                 </form>
@@ -101,20 +103,20 @@ const Routines = ({token}) => {
                     {user.id === routine.creatorId? <>
                         <button onClick = { () => {
                             console.log(activity.routineActivityId);
-                            deleteRoutineActivity(token, activity.routineActivityId);
+                            deleteRoutineActivity(token, activity.routineActivityId, setRoutines);
                         }}>Remove Activity</button>
                         <h3>Edit Routine Activity</h3>
                         <form onSubmit = {(event) => {
                             event.preventDefault();
-                            editRoutineActivity(token, activity.routineActivityId, count, duration);
+                            editRoutineActivity(token, activity.routineActivityId, count, duration, setRoutines);
                         }}>
                         <input 
                             placeholder='Count*'
-                            value={count}
+                            // value={count}
                             onChange={(event) => setCount(event.target.value)} />
                         <input 
                             placeholder= 'Duration*'
-                            value={duration}
+                            // value={duration}
                             onChange={(event) => setDuration(event.target.value)} />
                         <input type = 'submit' />
                         </form>
