@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { Link } from 'react-router-dom';
 import {login, register} from '../apiCalls'
 
 const Login = ({match, history, setToken}) => {
@@ -24,6 +25,7 @@ const Login = ({match, history, setToken}) => {
                 
             } else {
                 const result = await login(username, password, setToken)
+                history.push('/');
                 
             }
         }}>
@@ -44,6 +46,12 @@ const Login = ({match, history, setToken}) => {
                 null
             }
             <input type='submit'/>
+            { // Adjust the link displayed to the user depending on the page they are on
+                match.url === '/register'?
+                    <Link to='/login'>Already have an account?</Link>
+                    :
+                    <Link to='/register'>Don't have an account?</Link>
+            }
         </form>
     )
 }

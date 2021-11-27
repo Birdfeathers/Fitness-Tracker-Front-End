@@ -26,31 +26,35 @@ const SingleActivity = ({match, token}) => {
             <p><b>Name: </b>{activity.name}</p>
             <p><b>Description: </b>{activity.description}</p>
         </div>
-        <div>
-            <h3>Edit Activity</h3>
-            <form
-            onSubmit={async (event) => {
-                event.preventDefault();
+        {token?
+            <div>
+                <h3>Edit Activity</h3>
+                <form
+                onSubmit={async (event) => {
+                    event.preventDefault();
 
-                const result = await editActivity(token, match.params.activityId, name, description);
-                if (result.error) alert(result.message);
-                setEditedActivity(result);
-            }}>
-                <input
-                placeholder='name'
-                value={name}
-                onChange={(event) => {
-                    setName(event.target.value);
-                }} />
-                <input
-                placeholder='description'
-                value={description}
-                onChange={(event) => {
-                    setDescription(event.target.value);
-                }} />
-                <input type='submit' />
-            </form>
-        </div>
+                    const result = await editActivity(token, match.params.activityId, name, description);
+                    if (result.error) alert(result.message);
+                    setEditedActivity(result);
+                }}>
+                    <input
+                    placeholder='name'
+                    value={name}
+                    onChange={(event) => {
+                        setName(event.target.value);
+                    }} />
+                    <input
+                    placeholder='description'
+                    value={description}
+                    onChange={(event) => {
+                        setDescription(event.target.value);
+                    }} />
+                    <input type='submit' />
+                </form>
+            </div>
+            :
+            null
+        }
         <h2>Related Routines</h2>
         {routines.length?
             routines.map((routine, idx) => {

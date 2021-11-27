@@ -15,6 +15,9 @@ async function register(username, password, setToken)
         })
         const result = await response.json();
         console.log(result);
+        if (result.error) {
+            alert(result.message);
+        }
         setToken(result.token);
         localStorage.setItem('token', result.token)
         return result;
@@ -36,8 +39,12 @@ async function login(username, password, setToken)
             password
         })
         })
-        const result = response.json();
+        const result = await response.json();
         console.log(result);
+        if (result.error) {
+            alert(result.message);
+            return;
+        }
         setToken(result.token);
         localStorage.setItem('token', result.token);
         return result;
