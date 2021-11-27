@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from "react";
 import { editActivity, getRoutinesByActivity, getActivities } from "../apiCalls";
 
-const SingleActivity = ({match}) => {
+const SingleActivity = ({match, token}) => {
     const [routines, setRoutines] = useState('');
     const [activity, setActivity] = useState('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
+    const [editedActivity, setEditedActivity] = useState('');
 
     useEffect(async () => {
         const activities = await getActivities();
@@ -17,7 +18,7 @@ const SingleActivity = ({match}) => {
 
         const result = await getRoutinesByActivity(match.params.activityId);
         setRoutines(result);
-    }, [])
+    }, [editedActivity])
     return (
         <>
         <div>
@@ -27,7 +28,14 @@ const SingleActivity = ({match}) => {
         </div>
         <div>
             <h3>Edit Activity</h3>
-            <form>
+            <form
+            onSubmit={async (event) => {
+                event.preventDefault();
+
+                const result = await editActivity(token, match.params.activityId, name, description);
+                if (result.error) alert(result.message);
+                setEditedActivity(result);
+            }}>
                 <input
                 placeholder='name'
                 value={name}
