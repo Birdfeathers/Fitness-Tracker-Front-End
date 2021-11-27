@@ -46,7 +46,7 @@ async function login(username, password, setToken)
     }
 }
 
-async function getUser(token, setUser)
+async function getUser(token)
 {
     try {
         const response = await fetch(BaseUrl + 'api/users/me', {
