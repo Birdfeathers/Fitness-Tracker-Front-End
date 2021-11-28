@@ -1,0 +1,16 @@
+.blackBorder{
+   border: 1px solid black;
+   
+  
+}
+
+.smallMargin{
+    margin: 2%;
+}
+
+.titleBar{
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}

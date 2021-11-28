@@ -86,7 +86,6 @@ const AddActivity = ({token, activities, routine, setMyRoutines, username}) => {
 
 const Activity = ({activity}) => {
     return <>
-    <p><b> {activity.name} </b></p>
     <p><b>Description: </b>{activity.description}</p>
     <p><b>Duration: </b>{activity.duration}</p>
     <p><b>Count: </b>{activity.count}</p>
@@ -139,24 +138,35 @@ const MyRoutines = ({token}) => {
     <h1>My Routines</h1>
     <NewRoutine  token = {token} setMyRoutines = {setMyRoutines} username = {user.username}/>
     {myRoutines.map((routine, key) => {
-        return(<div key = {key}>
-            <h4><b>{routine.name}</b></h4>
+        return(<div key = {key} className = "blackBorder smallMargin">
+            <div className = "titleBar">
+                <h2><b>{routine.name}</b></h2>
+                <DeleteRoutine token = {token} routine = {routine} setMyRoutines = {setMyRoutines} username = {user.username}/>
+            </div>
             <p><b>Goal: </b>{routine.goal}</p>
             <p><b>Creator: </b>{routine.creatorName}</p>
-            <DeleteRoutine token = {token} routine = {routine} setMyRoutines = {setMyRoutines} username = {user.username}/>
-            <h3>Edit Routine</h3>
-            <EditRoutine token = {token} routine = {routine} setMyRoutines = {setMyRoutines} username = {user.username} />
-            <h3>Add Activity to Routine</h3>
-            <AddActivity token = {token} activities = {activities} routine = {routine} setMyRoutines = {setMyRoutines} username = {user.username}/>
-            <p><b>Activities: </b></p>
+            <div className = "blackBorder">
+                <h3>Edit Routine</h3>
+                <EditRoutine token = {token} routine = {routine} setMyRoutines = {setMyRoutines} username = {user.username} />
+            </div>
+            <h3><b>Routine Activities: </b></h3>
             {routine.activities.map((activity, key) => {
-                return <div key = {key} >
+                return <div key = {key} className = "blackBorder smallMargin">
+                    <div className = "titleBar">
+                        <h5><b>{activity.name}</b></h5>
+                        <RemoveActivity token = {token} activity = {activity} setMyRoutines = {setMyRoutines} username = {user.username}/>
+                    </div>
                     <Activity activity = {activity} />
-                    <RemoveActivity token = {token} activity = {activity} setMyRoutines = {setMyRoutines} username = {user.username}/>
-                    <p><b>Edit Routine Activity</b></p>
-                    <EditRoutineActivity token = {token} activity = {activity} setMyRoutines = {setMyRoutines} username = {user.username}/>
+                    <div className = "blackBorder">
+                        <h4><b>Edit Routine Activity</b></h4>
+                        <EditRoutineActivity token = {token} activity = {activity} setMyRoutines = {setMyRoutines} username = {user.username}/>
+                    </div>
                     </div>
             })}
+            <div className = "blackBorder">
+                <h3>Add Activity to Routine</h3>
+                <AddActivity token = {token} activities = {activities} routine = {routine} setMyRoutines = {setMyRoutines} username = {user.username}/>
+            </div>
         </div>
         
           
