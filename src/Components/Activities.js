@@ -34,37 +34,51 @@ const Activities = ({history, token, setSelectedActivity}) => {
                     }
 
                 }}>
-                    <input 
-                    placeholder='Name*'
-                    value={name}
-                    onChange={(event) => setName(event.target.value)} />
-                    <input 
-                    placeholder='Description*'
-                    value={description}
-                    onChange={(event) => setDescription(event.target.value)} />
-                    <input type='submit' />
+                    <div className="row">
+                        <div className="col">
+                            <input 
+                            className="form-control"
+                            placeholder='Name*'
+                            value={name}
+                            onChange={(event) => setName(event.target.value)} />
+                        </div>
+                        <div className="col">
+                        <input 
+                        className="form-control"
+                        placeholder='Description*'
+                        value={description}
+                        onChange={(event) => setDescription(event.target.value)} />
+                        </div>
+                        <div className="col">
+                            <input className="btn btn-primary" type='submit' />
+                        </div>
+                    </div>
                 </form>
                 </>
                 :
                 null
             }
-            {activities?
-                activities.map((activity, idx) => {
-                    return (<a 
-                    href=""
-                    key={idx}
-                    onClick={() => {
-                        setSelectedActivity(activity);
-                        history.push(`/activities/${activity.id}`);
-                    }}>
-                    <h3>{activity.name}</h3>
-                    <p>Description: {activity.description}</p>
-                    </a>
-                    )
-                })
-                :
-                null
-            }
+            <div className="list-group">
+                {activities?
+                    activities.map((activity, idx) => {
+                        return (<a 
+                        id='activity'
+                        className="list-group-item list-group-item-action flex-column align-items-start"
+                        href=""
+                        key={idx}
+                        onClick={() => {
+                            setSelectedActivity(activity);
+                            history.push(`/activities/${activity.id}`);
+                        }}>
+                            <h3>{activity.name}</h3>
+                            <p>Description: {activity.description}</p>
+                        </a>
+                        )
+                    })
+                    :
+                    null
+                }
+            </div>
         </>
     )
 }
