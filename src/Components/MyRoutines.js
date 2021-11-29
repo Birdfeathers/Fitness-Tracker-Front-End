@@ -13,7 +13,8 @@ const NewRoutine = ({token, setMyRoutines, username}) => {
             const newRoutine = await postRoutine(token, name, goal, true);
                     
             if (newRoutine.error) alert(newRoutine.message);
-            else{setMyRoutines(await getRoutinesByUser(username, token));}
+            else{setMyRoutines(await getRoutinesByUser(username, token));
+                event.target.reset();}
                 
                 
             }}>
@@ -48,7 +49,10 @@ const EditRoutine = ({token, routine, setMyRoutines, username}) => {
         event.preventDefault();
         const editedRoutine = await editRoutine(token, routine.id, name, goal);
         if (editedRoutine.error) alert(editedRoutine.message);
-        else{setMyRoutines(await getRoutinesByUser(username, token));}
+        else{
+            setMyRoutines(await getRoutinesByUser(username, token));
+            event.target.reset();
+        }
 
     }}>
     <input className = "form-control"
@@ -76,7 +80,8 @@ const AddActivity = ({token, activities, routine, setMyRoutines, username}) => {
         event.preventDefault();
         const activity = attachActivity(routine.id, activityId, count, duration);
         if (activity.error) alert(activity.message);
-        else{setMyRoutines(await getRoutinesByUser(username, token));}
+        else{setMyRoutines(await getRoutinesByUser(username, token));
+            event.target.reset();}
     }}>
         <select onChange = {(event) => {setActivityId(event.target.value)}}>
             <option value = {"none"}> Select an activity: </option>
@@ -121,7 +126,8 @@ const EditRoutineActivity = ({token, activity, setMyRoutines, username}) => {
         event.preventDefault();
         const editedRoutineActivity = await editRoutineActivity(token, activity.routineActivityId, count, duration);
         if (editedRoutineActivity.error) alert(editedRoutineActivity.message);
-        else{setMyRoutines(await getRoutinesByUser(username, token));}
+        else{setMyRoutines(await getRoutinesByUser(username, token));
+            event.target.reset();}
     }}>
     <input 
         placeholder='Count*'
@@ -146,7 +152,7 @@ const MyRoutines = ({token}) => {
     }, [])
 
     return(<>
-    <h1>My Routines</h1>
+    <h1 className = "title">My Routines</h1>
     <NewRoutine  token = {token} setMyRoutines = {setMyRoutines} username = {user.username}/>
     {myRoutines.map((routine, key) => {
         return(<div key = {key} className = "outerBorder smallMargin">

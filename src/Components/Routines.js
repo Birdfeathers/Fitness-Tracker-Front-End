@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { getRoutines } from "../apiCalls";
 
 
-const Routines = ({token, history}) => {
+const Routines = ({ history}) => {
     const [routines, setRoutines] = useState([]);
     
 
@@ -14,7 +14,7 @@ const Routines = ({token, history}) => {
     
     return (
     <>
-        <h1>Routines</h1>
+        <h1 className = "title">Routines</h1>
         {routines.map((routine, key) => {return(
         <div key = {key} className = "outerBorder smallMargin">
             <div className = "titleBar" >
