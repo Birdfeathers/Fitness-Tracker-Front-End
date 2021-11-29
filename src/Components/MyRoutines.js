@@ -8,7 +8,7 @@ const NewRoutine = ({token, setMyRoutines, username}) => {
 
     return <>
         <h2>Add New Routine </h2>
-        <form onSubmit = {async (event) => {
+        <form className = "mb-3" onSubmit = {async (event) => {
             event.preventDefault();
             const newRoutine = await postRoutine(token, name, goal, true);
                     
@@ -17,10 +17,10 @@ const NewRoutine = ({token, setMyRoutines, username}) => {
                 
                 
             }}>
-            <input 
+            <input className = "form-control"
                     placeholder='Name*'
                     onChange={(event) => setName(event.target.value)} />
-            <input 
+            <textarea className = "form-control"
                     placeholder='Goal*'
                     onChange={(event) => setGoal(event.target.value)} />
             <input type='submit' />
@@ -40,35 +40,45 @@ const DeleteRoutine = ({token, routine, setMyRoutines, username}) => {
 const EditRoutine = ({token, routine, setMyRoutines, username}) => {
     const [name, setName] = useState("");
     const [goal, setGoal] = useState("");
-    return <form onSubmit = {async (event) => {
+    const [edit, setEdit] = useState(false);
+    return <>
+    <button onClick = {() => {setEdit(!edit)}}>Edit Routine</button>
+    {edit?
+    <form className = "mb-3 card card-body" onSubmit = {async (event) => {
         event.preventDefault();
         const editedRoutine = await editRoutine(token, routine.id, name, goal);
         if (editedRoutine.error) alert(editedRoutine.message);
         else{setMyRoutines(await getRoutinesByUser(username, token));}
 
     }}>
-    <input 
+    <input className = "form-control"
         placeholder='Name*'
         onChange={(event) => setName(event.target.value)} />    
-    <input 
+    <textarea className = "form-control"
         placeholder='Goal*'
         onChange={(event) => setGoal(event.target.value)} />
         <input type='submit' />
-    </form>
+    </form>: null }</>
+
+   
 }
 
 const AddActivity = ({token, activities, routine, setMyRoutines, username}) => {
     const [count, setCount] = useState("");
     const [duration, setDuration] = useState("");
     const [activityId, setActivityId] = useState("");
+    const [addActivity, setAddActivity] = useState(false);
 
-    return <form onSubmit = {async (event) => {
+    return <>
+    <button onClick = {() => {setAddActivity(!addActivity)}}>Add Activity to Routine</button>
+    { addActivity ?
+    <form className = "mb-3" onSubmit = {async (event) => {
         event.preventDefault();
         const activity = attachActivity(routine.id, activityId, count, duration);
         if (activity.error) alert(activity.message);
         else{setMyRoutines(await getRoutinesByUser(username, token));}
     }}>
-        <select  onChange = {(event) => {setActivityId(event.target.value)}}>
+        <select onChange = {(event) => {setActivityId(event.target.value)}}>
             <option value = {"none"}> Select an activity: </option>
             {activities.map((activity, key) => {
                 return <option key = {key} value = {activity.id} >{activity.name}</option>
@@ -81,7 +91,7 @@ const AddActivity = ({token, activities, routine, setMyRoutines, username}) => {
             placeholder= 'Duration*'
             onChange={(event) => setDuration(event.target.value)} />
         <input type = 'submit' />
-    </form>
+    </form> : null }</>
 }
 
 const Activity = ({activity}) => {
@@ -103,8 +113,11 @@ const RemoveActivity = ({token, activity, setMyRoutines, username}) => {
 const EditRoutineActivity = ({token, activity, setMyRoutines, username}) => {
     const [count, setCount] = useState("");
     const [duration, setDuration] = useState("");
-
-    return <form onSubmit = {async (event) => {
+    const [edit, setEdit] = useState(false);
+    return <>
+    <button onClick = {() => {setEdit(!edit)}}>Edit Routine Activity</button>
+    { edit? 
+    <form onSubmit = {async (event) => {
         event.preventDefault();
         const editedRoutineActivity = await editRoutineActivity(token, activity.routineActivityId, count, duration);
         if (editedRoutineActivity.error) alert(editedRoutineActivity.message);
@@ -117,7 +130,7 @@ const EditRoutineActivity = ({token, activity, setMyRoutines, username}) => {
         placeholder= 'Duration*'
         onChange={(event) => setDuration(event.target.value)} />
     <input type = 'submit' />
-    </form>
+    </form> : null}</>
 }
 
 const MyRoutines = ({token}) => {
@@ -130,26 +143,21 @@ const MyRoutines = ({token}) => {
         setMyRoutines(await getRoutinesByUser(userTemp.username, token));
         setActivities(await getActivities());
         setUser(userTemp);
-   
-        
-
     }, [])
+
     return(<>
     <h1>My Routines</h1>
     <NewRoutine  token = {token} setMyRoutines = {setMyRoutines} username = {user.username}/>
     {myRoutines.map((routine, key) => {
-        return(<div key = {key} className = "blackBorder smallMargin">
+        return(<div key = {key} className = "outerBorder smallMargin">
             <div className = "titleBar">
-                <h2><b>{routine.name}</b></h2>
+                <h4><b>{routine.name}</b></h4>
+                <h4><b>Created By {routine.creatorName}</b></h4>
                 <DeleteRoutine token = {token} routine = {routine} setMyRoutines = {setMyRoutines} username = {user.username}/>
             </div>
             <p><b>Goal: </b>{routine.goal}</p>
-            <p><b>Creator: </b>{routine.creatorName}</p>
-            <div className = "blackBorder">
-                <h3>Edit Routine</h3>
-                <EditRoutine token = {token} routine = {routine} setMyRoutines = {setMyRoutines} username = {user.username} />
-            </div>
-            <h3><b>Routine Activities: </b></h3>
+                <EditRoutine token = {token} routine = {routine} setMyRoutines = {setMyRoutines} username = {user.username}/>
+            <h5><b>Routine Activities: </b></h5>
             {routine.activities.map((activity, key) => {
                 return <div key = {key} className = "blackBorder smallMargin">
                     <div className = "titleBar">
@@ -157,16 +165,10 @@ const MyRoutines = ({token}) => {
                         <RemoveActivity token = {token} activity = {activity} setMyRoutines = {setMyRoutines} username = {user.username}/>
                     </div>
                     <Activity activity = {activity} />
-                    <div className = "blackBorder">
-                        <h4><b>Edit Routine Activity</b></h4>
                         <EditRoutineActivity token = {token} activity = {activity} setMyRoutines = {setMyRoutines} username = {user.username}/>
                     </div>
-                    </div>
             })}
-            <div className = "blackBorder">
-                <h3>Add Activity to Routine</h3>
                 <AddActivity token = {token} activities = {activities} routine = {routine} setMyRoutines = {setMyRoutines} username = {user.username}/>
-            </div>
         </div>
         
           

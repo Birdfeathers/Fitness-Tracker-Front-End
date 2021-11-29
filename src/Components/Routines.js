@@ -16,11 +16,11 @@ const Routines = ({token, history}) => {
     <>
         <h1>Routines</h1>
         {routines.map((routine, key) => {return(
-        <div key = {key}>
-            <h4><b>{routine.name}</b></h4>
-            <p><b>Goal: </b>{routine.goal}</p>
-            <p>
-                <b>Creator: </b>
+        <div key = {key} className = "outerBorder smallMargin">
+            <div className = "titleBar" >
+                <h4><b>{routine.name}</b></h4>
+                <h4>
+                Created By  
                 <a 
                 href=''
                 onClick={() => {
@@ -28,21 +28,25 @@ const Routines = ({token, history}) => {
                 }}>
                     {routine.creatorName}
                 </a>
-            </p>
-            <div><b>Activities: </b>{routine.activities.map((activity, key) => {
-                return <div key = {key}>
-                    <a 
-                    href =""
-                    onClick={() => {
+            </h4>
+            </div>
+            
+            <p><b>Goal: </b>{routine.goal}</p>
+            
+            <h5><b>Activities:</b> </h5>
+            {routine.activities.map((activity, key) => {
+                return <div key = {key} className = "blackBorder smallMargin">
+                    
+                    <a href ="" onClick={() => {
                         history.push(`/activities/${activity.id}`);
                     }}>
                         <p><b>{activity.name}</b></p>
-                    </a>
+                    </a> 
                     <p><b>Description: </b>{activity.description}</p>
                     <p><b>Duration: </b>{activity.duration}</p>
                     <p><b>Count: </b>{activity.count}</p>
                 </div>
-            })}</div>
+            })}
         </div>)})}
     </>
     )
