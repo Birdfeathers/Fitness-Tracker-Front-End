@@ -1,4 +1,4 @@
-const BaseUrl = "http://fitnesstrac-kr.herokuapp.com/";
+const BaseUrl = "https://fitnesstrackr-rafa.herokuapp.com/";
 
 async function register(username, password, setToken)
 {
@@ -15,8 +15,9 @@ async function register(username, password, setToken)
         })
         const result = await response.json();
         console.log(result);
-        if (result.error) {
+        if (result.message) {
             alert(result.message);
+            return;
         }
         setToken(result.token);
         localStorage.setItem('token', result.token)
@@ -41,13 +42,14 @@ async function login(username, password, setToken)
         })
         const result = await response.json();
         console.log(result);
-        if (result.error) {
+        if (result.token) {
+            setToken(result.token);
+            localStorage.setItem('token', result.token);
+            return result;
+        } else {
             alert(result.message);
             return;
         }
-        setToken(result.token);
-        localStorage.setItem('token', result.token);
-        return result;
     } catch (error) {
         console.error(error);
     }
@@ -81,6 +83,9 @@ async function getRoutinesByUser(username, token)
         })
         const result = await response.json();
         console.log(result);
+        if (result.message === "Sorry, no routines found for that username.") {
+            return [];
+        }
         return result;
     } catch(error) {
         console.error(error);
@@ -92,7 +97,7 @@ async function getRoutinesByUser(username, token)
 async function getActivities()
 {
     try {
-        const response = await fetch('https://sleepy-thicket-94945.herokuapp.com/' + 'api/activities', {
+        const response = await fetch(BaseUrl + 'api/activities', {
         headers: {
             'Content-Type': 'application/json',
         },

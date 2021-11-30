@@ -19,7 +19,7 @@ const Login = ({match, history, setToken}) => {
                     return;
                 } else {
                     await register(username, password, setToken);
-                    
+                    history.push('/login');
                     
                 }
                 
