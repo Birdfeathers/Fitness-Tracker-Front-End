@@ -7,7 +7,6 @@ import { logout } from './helperFunctions';
 const App = () => {
 
     const [token, setToken] = useState(localStorage.getItem('token'));
-    const [selectedActivity, setSelectedActivity] = useState('');
 
     useEffect(() => {
 
