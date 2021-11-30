@@ -92,7 +92,7 @@ async function getRoutinesByUser(username, token)
 async function getActivities()
 {
     try {
-        const response = await fetch(BaseUrl + 'api/activities', {
+        const response = await fetch('https://sleepy-thicket-94945.herokuapp.com/' + 'api/activities', {
         headers: {
             'Content-Type': 'application/json',
         },
