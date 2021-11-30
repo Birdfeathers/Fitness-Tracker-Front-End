@@ -10,7 +10,7 @@ const Home = ({token}) => {
         setUsername(result.username);
     }, [token])
     return (
-        <h1>Welcome {username? username : 'Stranger'}</h1>
+        <h1 className='home'>Welcome {username? username : 'Stranger'}</h1>
     )
 }
 

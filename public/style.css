@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 .blackBorder{
    border: 1px solid black;
    background-color: white;
@@ -33,10 +36,15 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* it center the item vertically */
     justify-content: center;
 }
 
 .nav-element {
     padding:5px 10px;
+}
+
+.home {
+    text-align: center;
+    margin: 10% 0px;
+    font-size: 10vmax;
 }
