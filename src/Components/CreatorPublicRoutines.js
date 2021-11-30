@@ -10,20 +10,24 @@ const CreatorPublicRoutines = ({match, token}) => {
     }, [token])
     return (
         <>
-        <h1>{match.params.username}'s routines</h1>
+        <h1 className = "title" >{match.params.username}'s Routines</h1>
         {userRoutines.length?
             userRoutines.map((routine, idx) => {
                 return (
                     <div key={idx}>
-                        <div id="activities-routine">
-                            <h3>{routine.name}</h3>
-                            <p><b>Creator: </b>{routine.creatorName}</p>
+                        <div id="activities-routine" className = "outerBorder smallMargin">
+                            <div className = "titleBar">
+                                <h4><b>{routine.name}</b></h4>
+                                <p><b>Creator: </b>{routine.creatorName}</p>
+                            </div>
                             <p><b>Goal: </b>{routine.goal}</p>
                         </div>
                         {routine.activities.map((activity, idx) => {
                             return (
-                                <div key={idx}>
+                                <div key={idx} className =  "blackBorder smallMargin">
+                                    <div className = "titleBar">
                                     <h5>{activity.name}</h5>
+                                    </div>
                                     <p><b>Description: </b>{activity.description}</p>
                                     <p><b>Duration: </b>{activity.duration}</p>
                                     <p><b>Count: </b>{activity.count}</p>
