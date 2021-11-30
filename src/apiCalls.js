@@ -17,7 +17,7 @@ async function register(username, password, setToken)
         console.log(result);
         if (result.error) {
             alert(result.message);
-            return;
+            return result;
         }
         setToken(result.token);
         localStorage.setItem('token', result.token)
@@ -44,7 +44,7 @@ async function login(username, password, setToken)
         console.log(result);
         if (result.error) {
             alert(result.message);
-            return;
+            return result;
         }
 
         setToken(result.token);

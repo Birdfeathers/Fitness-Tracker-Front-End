@@ -66,12 +66,7 @@ const Activities = ({history, token, setSelectedActivity}) => {
                         to={`/activities/${activity.id}`}
                         id='activity'
                         className="list-group-item list-group-item-action flex-column align-items-start"
-                        href=""
-                        key={idx}
-                        onClick={() => {
-                            setSelectedActivity(activity);
-                            history.push(`/activities/${activity.id}`);
-                        }}>
+                        key={idx}>
                             <h3>{activity.name}</h3>
                             <p>Description: {activity.description}</p>
                         </Link>

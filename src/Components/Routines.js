@@ -34,11 +34,10 @@ const Routines = ({ history}) => {
             {routine.activities.map((activity, key) => {
                 return <div key = {key} className = "blackBorder smallMargin">
                     
-                    <a href ="" onClick={() => {
-                        history.push(`/activities/${activity.id}`);
-                    }}>
+                    <Link 
+                    to={`/activities/${activity.id}`}>
                         <p><b>{activity.name}</b></p>
-                    </a> 
+                    </Link> 
                     <p><b>Description: </b>{activity.description}</p>
                     <p><b>Duration: </b>{activity.duration}</p>
                     <p><b>Count: </b>{activity.count}</p>

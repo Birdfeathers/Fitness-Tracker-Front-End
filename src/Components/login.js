@@ -18,13 +18,19 @@ const Login = ({match, history, setToken}) => {
                     alert('password and confirm password must match');
                     return;
                 } else {
-                    await register(username, password, setToken);
+                    const registerResult = await register(username, password, setToken);
+                    if (registerResult.error) {
+                        return;
+                    }
                     history.push('/login');
                     
                 }
                 
             } else {
-                const result = await login(username, password, setToken)
+                const loginResult = await login(username, password, setToken)
+                if (loginResult.error) {
+                    return;
+                }
                 history.push('/');
                 
             }
