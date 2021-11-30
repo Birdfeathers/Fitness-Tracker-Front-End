@@ -29,23 +29,40 @@ const Login = ({match, history, setToken}) => {
                 
             }
         }}>
-            <input 
-            placeholder='username'
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}/>
-            <input 
-            placeholder='password'
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}/>
-            {match.url === '/register'?
+            <div className="form-group">
+                <label htmlFor="username" className='form-label'>Username</label>
                 <input 
-                placeholder='confirm password'
-                value={confirmPassword}
-                onChange={(event) => setConfirmPassword(event.target.value)}/>
+                className='form-control'
+                id='username'
+                placeholder='username'
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}/>
+            </div>
+            <div className="form-group">
+                <label htmlFor="password" className='form-label'>Password</label>
+                <input 
+                className='form-control'
+                id='password'
+                type='password'
+                placeholder='password'
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}/>
+            </div>
+            {match.url === '/register'?
+                <div className="form-group">
+                    <label htmlFor="confirm-password" className='form-label'>Confirm Password</label>
+                    <input 
+                    className='form-control'
+                    id='confirm-password'
+                    type='password'
+                    placeholder='confirm password'
+                    value={confirmPassword}
+                    onChange={(event) => setConfirmPassword(event.target.value)}/>
+                </div>
                 :
                 null
             }
-            <input type='submit'/>
+            <input type='submit' className="btn btn-primary"/>
             { // Adjust the link displayed to the user depending on the page they are on
                 match.url === '/register'?
                     <Link to='/login'>Already have an account?</Link>
