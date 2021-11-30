@@ -20,7 +20,7 @@ const SingleActivity = ({match, token}) => {
         setRoutines(result);
     }, [editedActivity])
     return (
-        <>
+        <div className='container'>
         <div>
             <h1>{activity.name}</h1>
             <p><b>Name: </b>{activity.name}</p>
@@ -87,7 +87,7 @@ const SingleActivity = ({match, token}) => {
             :
             <h3>No related routines</h3>
         }
-        </>
+        </div>
     )
 }
 
