@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { getRoutines } from "../apiCalls";
-
+import {Link} from 'react-router-dom';
 
 const Routines = ({ history}) => {
     const [routines, setRoutines] = useState([]);
@@ -21,13 +21,10 @@ const Routines = ({ history}) => {
                 <h4><b>{routine.name}</b></h4>
                 <h4>
                 Created By  
-                <a 
-                href=''
-                onClick={() => {
-                    history.push(`/routines/${routine.creatorName}`)
-                }}>
+                <Link
+                to={`/routines/${routine.creatorName}`}>
                     {routine.creatorName}
-                </a>
+                </Link>
             </h4>
             </div>
             

@@ -15,7 +15,7 @@ async function register(username, password, setToken)
         })
         const result = await response.json();
         console.log(result);
-        if (result.message) {
+        if (result.error) {
             alert(result.message);
             return;
         }
@@ -42,14 +42,14 @@ async function login(username, password, setToken)
         })
         const result = await response.json();
         console.log(result);
-        if (result.token) {
-            setToken(result.token);
-            localStorage.setItem('token', result.token);
-            return result;
-        } else {
+        if (result.error) {
             alert(result.message);
             return;
         }
+
+        setToken(result.token);
+        localStorage.setItem('token', result.token);
+        return result;
     } catch (error) {
         console.error(error);
     }

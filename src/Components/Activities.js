@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { getActivities, postActivity } from "../apiCalls";
+import {Link} from 'react-router-dom';
 
 const Activities = ({history, token, setSelectedActivity}) => {
     const [activities, setActivities] = useState([]);
@@ -61,7 +62,8 @@ const Activities = ({history, token, setSelectedActivity}) => {
             <div className="list-group">
                 {activities?
                     activities.map((activity, idx) => {
-                        return (<a 
+                        return (<Link 
+                        to={`/activities/${activity.id}`}
                         id='activity'
                         className="list-group-item list-group-item-action flex-column align-items-start"
                         href=""
@@ -72,7 +74,7 @@ const Activities = ({history, token, setSelectedActivity}) => {
                         }}>
                             <h3>{activity.name}</h3>
                             <p>Description: {activity.description}</p>
-                        </a>
+                        </Link>
                         )
                     })
                     :
