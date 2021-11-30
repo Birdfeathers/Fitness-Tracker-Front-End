@@ -14,8 +14,8 @@ const CreatorPublicRoutines = ({match, token}) => {
         {userRoutines.length?
             userRoutines.map((routine, idx) => {
                 return (
-                    <div key={idx}>
-                        <div id="activities-routine" className = "outerBorder smallMargin">
+                    <div key={idx} className = "outerBorder smallMargin">
+                        <div id="activities-routine">
                             <div className = "titleBar">
                                 <h4><b>{routine.name}</b></h4>
                                 <p><b>Creator: </b>{routine.creatorName}</p>

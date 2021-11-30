@@ -59,16 +59,20 @@ const SingleActivity = ({match, token}) => {
         {routines.length?
             routines.map((routine, idx) => {
                 return (
-                    <div key={idx}>
+                    <div key={idx} className = "outerBorder smallMargin">
                         <div id="activities-routine">
-                            <h3>{routine.name}</h3>
-                            <p><b>Creator: </b>{routine.creatorName}</p>
+                            <div className = "titleBar">
+                            <h4>{routine.name}</h4>
+                            <p>Created by {routine.creatorName}</p>
+                            </div>
                             <p><b>Goal: </b>{routine.goal}</p>
                         </div>
                         {routine.activities.map((activity, idx) => {
                             return (
-                                <div key={idx}>
+                                <div key={idx} className = "blackBorder smallMargin">
+                                    <div className = "titleBar">
                                     <h5>{activity.name}</h5>
+                                    </div>
                                     <p><b>Description: </b>{activity.description}</p>
                                     <p><b>Duration: </b>{activity.duration}</p>
                                     <p><b>Count: </b>{activity.count}</p>

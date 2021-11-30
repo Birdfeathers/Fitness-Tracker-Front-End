@@ -20,6 +20,7 @@ const App = () => {
                     <Link to='/'>Home</Link>
                     <Link to='/routines'>Routines</Link>
                     <Link to='/activities'>Activities</Link>
+                    <Link to = '/routines/sandra'>Sandra</Link>
                     
                     {!token?
                         <>
