@@ -1,4 +1,4 @@
-const BaseUrl = "https://fitnesstrackr-rafa.herokuapp.com/";
+const BaseUrl = "https://fitnesstrac-kr.herokuapp.com/";
 
 async function register(username, password, setToken)
 {
