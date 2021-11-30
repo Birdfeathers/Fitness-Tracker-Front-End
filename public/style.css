@@ -28,3 +28,15 @@
     text-align: center;
     border-bottom: 3px solid black;
 }
+
+#nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* it center the item vertically */
+    justify-content: center;
+}
+
+.nav-element {
+    padding:5px 10px;
+}

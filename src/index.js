@@ -15,22 +15,22 @@ const App = () => {
     return (
         <Router>
             <div>
-                <div id='nav'>
-                    <h3>Fitness Trac.kr</h3>
-                    <Link to='/'>Home</Link>
-                    <Link to='/routines'>Routines</Link>
-                    <Link to='/activities'>Activities</Link>
-                    <Link to = '/routines/sandra'>Sandra</Link>
+                <div id='nav' className="btn-group">
+                    <h3 className='nav-element'>Fitness Trac.kr</h3>
+                    <Link className="btn btn-primary nav-element" to='/'>Home</Link>
+                    <Link className="btn btn-primary nav-element" to='/routines'>Routines</Link>
+                    <Link className="btn btn-primary nav-element" to='/activities'>Activities</Link>
                     
                     {!token?
                         <>
-                        <Link to='/login'>Login</Link>
-                        <Link to='/register'>Register</Link>
+                        <Link className="btn btn-primary nav-element" to='/login'>Login</Link>
+                        <Link className="btn btn-primary nav-element" to='/register'>Register</Link>
                         </>
                         :
                         <>
-                        <Link to='/my-routines'>MyRoutines</Link>
-                        <Link 
+                        <Link className="btn btn-primary nav-element" to='/my-routines'>MyRoutines</Link>
+                        <Link
+                        className="btn btn-primary nav-element" 
                         to='/login'
                         onClick={() => {
                             logout(setToken);

@@ -14,7 +14,7 @@ const Activities = ({history, token, setSelectedActivity}) => {
 
     return (
         <>
-            <h1>Activities</h1>
+            <h1 className='title'>Activities</h1>
             {token?
                 <>
                 <h2>Add New Activity</h2>
