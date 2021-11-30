@@ -74,12 +74,17 @@ async function getUser(token)
 
 async function getRoutinesByUser(username, token)
 {
+    const headers = {};
+    if (token) {
+        headers['Content-Type'] = 'application/json';
+        headers.Authorization = `Bearer ${token}`;
+    }
+    else {
+        headers['Content-Type'] = 'application/json';
+    }
     try{
         const response = await fetch(BaseUrl + 'api/users/'+ username + '/routines', {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        },
+        headers,
         })
         const result = await response.json();
         console.log(result);
