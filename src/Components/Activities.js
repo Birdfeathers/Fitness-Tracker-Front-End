@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { getActivities, postActivity } from "../apiCalls";
 import {Link} from 'react-router-dom';
 
-const Activities = ({history, token, setSelectedActivity}) => {
+const Activities = ({token}) => {
     const [activities, setActivities] = useState([]);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');

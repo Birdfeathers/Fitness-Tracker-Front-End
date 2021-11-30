@@ -42,7 +42,7 @@ const App = () => {
                     <Route exact path='/' render={(routeProps) => <Home {...routeProps} token={token}/>}></Route>
                     <Route path='/login' render={(routeProps) => <Login {...routeProps} setToken={setToken}/>}></Route>
                     <Route path='/register' render={(routeProps) => <Login {...routeProps} setToken={setToken}/>}></Route>
-                    <Route exact path='/activities' render={(routeProps) => <Activities {...routeProps} token={token} setSelectedActivity={setSelectedActivity}/>}></Route>
+                    <Route exact path='/activities' render={(routeProps) => <Activities {...routeProps} token={token}/>}></Route>
                     <Route path='/activities/:activityId' render={(routeProps) => <SingleActivity {...routeProps} token={token}/>}></Route>
                     <Route exact path='/routines' render={(routeProps) => <Routines {...routeProps} token = {token}/>}></Route>
                     <Route path='/my-routines' render={(routeProps) => <MyRoutines {...routeProps} token = {token}/>}></Route>

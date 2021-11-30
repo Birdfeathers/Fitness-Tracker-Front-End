@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { getRoutines } from "../apiCalls";
 import {Link} from 'react-router-dom';
 
-const Routines = ({ history}) => {
+const Routines = () => {
     const [routines, setRoutines] = useState([]);
     
 
